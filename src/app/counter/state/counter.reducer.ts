@@ -1,5 +1,6 @@
+import { state } from "@angular/animations";
 import { createReducer, on } from "@ngrx/store";
-import { decrement, increment, reset } from "./counter.action";
+import { changeChannelName, customIncrement, decrement, increment, reset } from "./counter.action";
 import { initialState } from "./counter.state";
 
 const _counterReducer = createReducer(
@@ -20,6 +21,19 @@ const _counterReducer = createReducer(
         return {
             ...state,
             counter: 0
+        }
+    }),
+    on(customIncrement, (state,action)=>{
+        console.log("action",action);
+        return {
+            ...state,
+            counter: state.counter + action.value
+        }
+    }),
+    on(changeChannelName, (state)=>{
+        return {
+            ...state,
+            channelName: "Modefity Channel Name is"
         }
     })
     )
