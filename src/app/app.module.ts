@@ -18,6 +18,9 @@ import { postsReducer } from './post/state/post.reducer';
 import { appReducer } from './store/app.state';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
+import { AddPostComponent } from './post/add-post/add-post.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { EditPostComponent } from './post/edit-post/edit-post.component';
 
 @NgModule({
   declarations: [
@@ -27,12 +30,15 @@ import { environment } from 'src/environments/environment';
     CounterButtonComponent,
     CustomIncrementComponent,
     HomeComponent,
-    PostComponent
+    PostComponent,
+    AddPostComponent,
+    EditPostComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     MaterialExampleModule,
     StoreModule.forRoot(appReducer),
     StoreDevtoolsModule.instrument({
