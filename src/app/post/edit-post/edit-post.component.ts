@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscriber, Subscription } from 'rxjs';
 import { Post } from 'src/app/modules/posts.module';
-
+import { updatePost } from '../state/post.actions';
+import { getPostById } from '../state/post.selector';
 
 @Component({
   selector: 'app-edit-post',
@@ -13,29 +14,30 @@ import { Post } from 'src/app/modules/posts.module';
 })
 export class EditPostComponent implements OnInit, OnDestroy {
 
-  postForm : FormGroup | any;
+  postForm =  new FormGroup({
+    title: new FormControl("dfsdf",[Validators.required]),
+    description: new FormControl("dsfdsf",[Validators.required])
+  });
+  id!: string;
   postSubscription = new Subscription();
   constructor(private activeRouter:ActivatedRoute,
-    private store: Store){ }
+    private store: Store,
+    private router: Router
+    ){ }
 
   ngOnInit(): void {
     
     this.activeRouter.paramMap.subscribe((data: any)=>{
       console.log("active router: -",data);
       console.log("active 2", data.params)
+      this.id = data.params.id;
       const id = data.params.id;
       console.log("id:-", id);
-      this.postSubscription = this.store.select(getPostsById, {id}).subscribe(res=>{
+      this.postSubscription = this.store.select(getPostById, {id}).subscribe(res=>{
         console.log("data from store:-",res);
-        this.createForm();
+        this.postForm.setValue({title: res.title, description: res.description});
       })
     })
-  }
-  createForm(){
-    this.postForm = new FormGroup({
-      title: new FormControl(""),
-      description: new FormControl("")
-    });
   }
   ngOnDestroy(): void {
       if(this.postSubscription){
@@ -43,11 +45,17 @@ export class EditPostComponent implements OnInit, OnDestroy {
       }
   }
   onUpdatePost(){
-    
+    console.log("onUpdatePost:-",this.postForm.value);
+    const title = this.postForm.value.title;
+    const description = this.postForm.value.description;
+    const post : Post = {
+      id: this.id,
+      title,
+      description
+    }
+    console.log("Update Post:-",post);
+    this.store.dispatch(updatePost({ post }));
+    this.router.navigate(['post']);
   }
 
 }
-function getPostsById(getPostsById: any, arg1: { id: any; }) {
-  throw new Error('Function not implemented.');
-}
-

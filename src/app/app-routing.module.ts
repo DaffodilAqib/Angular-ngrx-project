@@ -7,13 +7,16 @@ import { EditPostComponent } from './post/edit-post/edit-post.component';
 import { PostComponent } from './post/post.component';
 
 const routes: Routes = [
-  {path:"home",component:HomeComponent},
-  {path:"counter",component:CounterComponent},
-  {path:"post",component:PostComponent,
-    children:[
-      {path:"add", component: AddPostComponent},
-      {path:"edit/:id", component: EditPostComponent}
-    ]
+  {path:"",component:HomeComponent},
+  {path:"counter",
+  loadChildren: ()=> import('./counter/counter/counter.module').then((m)=> m.CounterModule)
+  },
+  {path:"post",
+    loadChildren: ()=> import('./post/post/post.module').then((m)=>m.PostModule)
+  },
+  {
+    path:"auth",
+    loadChildren: ()=> import('./auth/auth.module').then((m)=> m.AuthModule)
   }
 ]; // sets up routes constant where you define your routes
 
