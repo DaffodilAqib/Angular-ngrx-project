@@ -20,6 +20,7 @@ import { environment } from 'src/environments/environment';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 
 
@@ -27,6 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     AppComponent,
     HomeComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     MaterialExampleModule,
     EffectsModule.forRoot([]),
-    StoreModule.forRoot({}),
+    StoreModule.forRoot(appReducer),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode

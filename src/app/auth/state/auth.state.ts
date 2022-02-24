@@ -1,3 +1,9 @@
-export interface AuthState {}
+import { User } from "src/app/modules/user.module";
 
-export const initialState: AuthState = {};
+export interface AuthState {
+    user: User | null;
+}
+
+export const initialState: AuthState = {
+    user: null
+};

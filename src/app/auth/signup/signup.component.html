@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row justify-content-around mt-5">
+        <div class="col-md-4" style="text-align: center;">
+            <h3>Sign Up</h3>
+            <hr>
+            <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+                <div class="example-container">
+                    <mat-form-field appearance="fill" style="width: 233px;">
+                      <mat-label>Enter your email</mat-label>
+                      <input matInput placeholder="pat@example.com" formControlName="email" required>
+                      <mat-error *ngIf="signupForm.value.email.invalid">{{getErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                  
+                    <mat-form-field appearance="fill">
+                      <mat-label>Enter your password</mat-label>
+                      <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </button>
+                    </mat-form-field>
+                    <br>
+                    <input type="submit" class="btn btn-primary submit_btn" value="Submit">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
