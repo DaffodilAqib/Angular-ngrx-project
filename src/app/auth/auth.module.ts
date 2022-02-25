@@ -22,7 +22,7 @@ import { SignupComponent } from './signup/signup.component';
     ReactiveFormsModule,
     MaterialExampleModule,
     AuthRoutingModule,
-    EffectsModule.forFeature([AuthEffects]),
+    EffectsModule.forFeature([]),
     
   ]
 })

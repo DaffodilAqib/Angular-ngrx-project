@@ -21,4 +21,20 @@ export class AuthService {
   signup(data: {email:string, password: string}){
     return this.http.post(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.FIREBASE_API_KEY}`,data);
   }
+  setUserInLocalStorage(data:any){
+    console.log(data);
+    localStorage.setItem('userData',data);
+  }
+  getUserFromLocalStorage(){
+    const userDataString = localStorage.getItem('userData');
+    if(userDataString){
+      const userData = JSON.parse(userDataString);
+      console.log("user form Local storage:-",userData);
+      return userData;
+    }
+    return null;
+  }
+  logOut(){
+    localStorage.removeItem('userData');
+  }
 }

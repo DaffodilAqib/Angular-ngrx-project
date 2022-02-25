@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscriber, Subscription } from 'rxjs';
 import { Post } from 'src/app/modules/posts.module';
-import { updatePost } from '../state/post.actions';
+import { updatePostStart } from '../state/post.actions';
 import { getPostById } from '../state/post.selector';
 
 @Component({
@@ -15,8 +15,8 @@ import { getPostById } from '../state/post.selector';
 export class EditPostComponent implements OnInit, OnDestroy {
 
   postForm =  new FormGroup({
-    title: new FormControl("dfsdf",[Validators.required]),
-    description: new FormControl("dsfdsf",[Validators.required])
+    title: new FormControl("",[Validators.required]),
+    description: new FormControl("",[Validators.required])
   });
   id!: string;
   postSubscription = new Subscription();
@@ -54,7 +54,7 @@ export class EditPostComponent implements OnInit, OnDestroy {
       description
     }
     console.log("Update Post:-",post);
-    this.store.dispatch(updatePost({ post }));
+    this.store.dispatch(updatePostStart({ post }));
     this.router.navigate(['post']);
   }
 

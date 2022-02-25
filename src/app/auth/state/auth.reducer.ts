@@ -1,7 +1,7 @@
-import { state } from "@angular/animations";
+// import { state } from "@angular/animations";
 import { createReducer, on } from "@ngrx/store";
 
-import { loginSuccess, signupSuccess } from "./auth.action";
+import { autoLogOut, loginSuccess, signupSuccess } from "./auth.action";
 import { initialState } from "./auth.state";
 
 const _authReducer = createReducer(initialState,
@@ -15,6 +15,12 @@ const _authReducer = createReducer(initialState,
         return {
             ...state,
             user: action.user
+        }
+    }),
+    on(autoLogOut, (state,action)=>{
+        return {
+            ...state,
+            user: null
         }
     })
     )

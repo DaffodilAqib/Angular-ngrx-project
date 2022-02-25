@@ -10,5 +10,12 @@ export const getPosts = createSelector(getPostsState,(state)=>{
 })
 
 export const getPostById = createSelector(getPostsState, (state: any, props: any)=>{
-    return state.posts[(props.id)-1];
+    // return state.posts[(props.id)-1];
+    console.log("id#:-",props.id);
+    console.log("# state:-", state.posts)
+    for(let post of state.posts){
+        if(post.id==props.id){
+            return post
+        }
+    }
 })

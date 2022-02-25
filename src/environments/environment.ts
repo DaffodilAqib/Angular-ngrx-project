@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  FIREBASE_API_KEY: 'AIzaSyBPfUPPpiV41ngNGdmw6sQQhgwbv7weWkA'
+  FIREBASE_API_KEY: 'AIzaSyBPfUPPpiV41ngNGdmw6sQQhgwbv7weWkA',
+  POSTS_URL: "https://firestore.googleapis.com/v1/projects/employee-das/databases/(default)/documents/Posts"
 };
 
 /*

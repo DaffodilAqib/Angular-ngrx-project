@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Post } from 'src/app/modules/posts.module';
 import { AppState } from 'src/app/store/app.state';
-import { addPost } from '../state/post.actions';
+import { addPostStart } from '../state/post.actions';
 
 @Component({
   selector: 'app-add-post',
@@ -28,7 +28,7 @@ export class AddPostComponent implements OnInit {
         title: this.addPostForm.value.title,
         description: this.addPostForm.value.description
       }
-      this.store.dispatch(addPost({ post }));
+      this.store.dispatch(addPostStart({ post }));
     }
     console.log(this.addPostForm.value);
     this.router.navigate(['post']);

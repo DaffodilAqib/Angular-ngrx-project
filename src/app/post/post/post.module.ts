@@ -10,6 +10,8 @@ import { MaterialExampleModule } from 'src/material.module';
 import { StoreModule } from '@ngrx/store';
 import { postsReducer } from '../state/post.reducer';
 import { POST_STATE_NAME } from '../state/post.selector';
+import { EffectsModule } from '@ngrx/effects';
+import { PostEffects } from '../state/post.effects';
 
 
 @NgModule({
@@ -23,6 +25,7 @@ import { POST_STATE_NAME } from '../state/post.selector';
     PostRoutingModule,
     ReactiveFormsModule,
     MaterialExampleModule,
+    EffectsModule.forFeature([PostEffects]),
     StoreModule.forFeature(POST_STATE_NAME,postsReducer)
   ]
 })
