@@ -26,18 +26,22 @@ export class EditPostComponent implements OnInit, OnDestroy {
     ){ }
 
   ngOnInit(): void {
-    
-    this.activeRouter.paramMap.subscribe((data: any)=>{
-      console.log("active router: -",data);
-      console.log("active 2", data.params)
-      this.id = data.params.id;
-      const id = data.params.id;
-      console.log("id:-", id);
-      this.postSubscription = this.store.select(getPostById, {id}).subscribe(res=>{
-        console.log("data from store:-",res);
-        this.postForm.setValue({title: res.title, description: res.description});
-      })
+    this.postSubscription = this.store.select(getPostById).subscribe((post)=>{
+      if(post){
+        this.postForm.setValue({title: post.title, description: post.description});
+      }
     })
+    // this.activeRouter.paramMap.subscribe((data: any)=>{
+    //   console.log("active router: -",data);
+    //   console.log("active 2", data.params)
+    //   this.id = data.params.id;
+    //   const id = data.params.id;
+    //   console.log("id:-", id);
+    //   this.postSubscription = this.store.select(getPostById, {id}).subscribe(res=>{
+    //     console.log("data from store:-",res);
+    //     this.postForm.setValue({title: res.title, description: res.description});
+    //   })
+    // })
   }
   ngOnDestroy(): void {
       if(this.postSubscription){

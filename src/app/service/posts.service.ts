@@ -32,4 +32,10 @@ export class PostsService {
       })
     )
   }
+  updatePost(id: any, data: any){
+    return this.http.patch(environment.POSTS_URL+'/'+id+"?updateMask.fieldPaths=title&updateMask.fieldPaths=description",data);
+  }
+  deletePost(id: any){
+    return this.http.delete(environment.POSTS_URL+`/${id}`);
+  }
 }

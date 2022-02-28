@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Post } from '../modules/posts.module';
 import { AppState } from '../store/app.state';
-import { deletePost, loadPost } from './state/post.actions';
+import { deletePostStart, loadPost } from './state/post.actions';
 import { getPosts } from './state/post.selector';
 
 @Component({
@@ -23,7 +23,7 @@ export class PostComponent implements OnInit {
   onDeletePost(id:any){
     if(confirm("Are you sure??")){
       console.log("deleting post");
-      this.store.dispatch(deletePost({ id }));
+      this.store.dispatch(deletePostStart({ id }));
     }
     console.log(id);
   }
