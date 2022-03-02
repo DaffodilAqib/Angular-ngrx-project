@@ -42,8 +42,9 @@ export class AuthEffects{
     })
     loginNagivation$ = createEffect(()=>{
         return this.action$.pipe(
-            ofType(loginSuccess),
+            ofType(...[loginSuccess, signupSuccess]),
             tap((action) => {
+                this.store.dispatch(setErrorMessage({ message: '' }));
                 if(action.redirected){
                     this.router.navigate(['/']);
                 }
@@ -84,9 +85,13 @@ export class AuthEffects{
             ofType(autoLogin),
             mergeMap((action)=>{
                 const user = this.authService.getUserFromLocalStorage();
-                return of(loginSuccess({user: user, redirected: false}))
+                if(user){
+                    console.log("user:- 36", user);
+                    return of(loginSuccess({user, redirected: false}))
+                }
+                return of();
             })
-        )
+        );
     });
     autoLogOut$ = createEffect(()=>{
         return this.action$.pipe(ofType(autoLogOut),

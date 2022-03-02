@@ -5,12 +5,16 @@ import { HomeComponent } from './home/home.component';
 import { AddPostComponent } from './post/add-post/add-post.component';
 import { EditPostComponent } from './post/edit-post/edit-post.component';
 import { PostComponent } from './post/post.component';
+import { SinglePostComponent } from './post/single-post/single-post.component';
 import { AuthGuard } from './service/auth.guard';
 
 const routes: Routes = [
   {path:"",component:HomeComponent},
   {path:"counter",
   loadChildren: ()=> import('./counter/counter/counter.module').then((m)=> m.CounterModule)
+  },
+  {
+    path:"post/details/:id", component: SinglePostComponent
   },
   {path:"post",
     loadChildren: ()=> import('./post/post/post.module').then((m)=>m.PostModule),

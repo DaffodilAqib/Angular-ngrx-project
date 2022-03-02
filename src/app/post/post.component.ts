@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Post } from '../modules/posts.module';
 import { AppState } from '../store/app.state';
 import { deletePostStart, loadPost } from './state/post.actions';
-import { getPosts } from './state/post.selector';
+import { getCount, getPosts } from './state/post.selector';
 
 @Component({
   selector: 'app-post',
@@ -13,11 +13,13 @@ import { getPosts } from './state/post.selector';
 })
 export class PostComponent implements OnInit {
 
-  posts$ = new Observable<Post[]>()
+  posts$ = new Observable<Post[]>();
+  count$ = new Observable<number>();
   constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
     this.posts$ = this.store.select(getPosts);
+    this.count$ = this.store.select(getCount);
     this.store.dispatch(loadPost());
   }
   onDeletePost(id:any){
@@ -25,7 +27,6 @@ export class PostComponent implements OnInit {
       console.log("deleting post");
       this.store.dispatch(deletePostStart({ id }));
     }
-    console.log(id);
   }
 
 }

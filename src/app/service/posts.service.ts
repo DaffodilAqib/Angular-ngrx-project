@@ -38,4 +38,7 @@ export class PostsService {
   deletePost(id: any){
     return this.http.delete(environment.POSTS_URL+`/${id}`);
   }
+  getPostById(id: string): Observable<Post>{
+    return this.http.get<Post>(environment.POSTS_URL+`/${id}`);
+  }
 }

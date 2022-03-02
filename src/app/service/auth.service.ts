@@ -30,7 +30,12 @@ export class AuthService {
     if(userDataString){
       const userData = JSON.parse(userDataString);
       console.log("user form Local storage:-",userData);
-      return userData;
+      const user = new User(
+        userData.email,
+        userData.token,
+        userData.localId,
+      );
+      return user;
     }
     return null;
   }

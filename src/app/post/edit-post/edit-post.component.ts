@@ -18,7 +18,7 @@ export class EditPostComponent implements OnInit, OnDestroy {
     title: new FormControl("",[Validators.required]),
     description: new FormControl("",[Validators.required])
   });
-  id!: string;
+  id!: any;
   postSubscription = new Subscription();
   constructor(private activeRouter:ActivatedRoute,
     private store: Store,
@@ -28,6 +28,7 @@ export class EditPostComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.postSubscription = this.store.select(getPostById).subscribe((post)=>{
       if(post){
+        this.id = post.id;
         this.postForm.setValue({title: post.title, description: post.description});
       }
     })

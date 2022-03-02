@@ -12,13 +12,15 @@ import { postsReducer } from '../state/post.reducer';
 import { POST_STATE_NAME } from '../state/post.selector';
 import { EffectsModule } from '@ngrx/effects';
 import { PostEffects } from '../state/post.effects';
+import { SinglePostComponent } from '../single-post/single-post.component';
 
 
 @NgModule({
   declarations: [
     PostComponent,
     AddPostComponent,
-    EditPostComponent
+    EditPostComponent,
+    SinglePostComponent
   ],
   imports: [
     CommonModule,
